@@ -20,14 +20,18 @@ export const context = React.createContext<
 export function Preview() {
   const params = useParams()
   const [components, setComponents] = useState<ComponentSchema[]>([])
+  const [width, setWidth] = useState(320)
+  const [height, setHeight] = useState(600)
   // 用于预览时能够初始化事件
   const [reRender, setReRender] = useState(false)
   // 获取预览页面数据
   useEffect(() => {
     if (params.id) {
       findPage(+params.id)
-        .then((components) => {
+        .then(({ components, width, height }) => {
           setComponents(components)
+          setWidth(width)
+          setHeight(height)
         })
         .catch(() => {
           Message.error('页面获取失败')
@@ -43,8 +47,7 @@ export function Preview() {
           setReRender
         }}
       >
-        <div className="preview-wrapper"></div>
-        <div className="canvas-wrapper preview-canvas">
+        <div className="canvas-wrapper preview-canvas" style={{ width: `${width}px`, height: `${height}px` }}>
           {components.map((componentSchema, index) => {
             const schema = componentSchema
             // 根据schema的名称进行相应的渲染

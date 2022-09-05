@@ -1,35 +1,28 @@
 import '../component/canvas/style.scss'
 
-import { CSSProperties, Dispatch, useState } from 'react'
+import { CSSProperties } from 'react'
 import { getComponent } from '../component/plugins/plugins'
 import { ComponentSchema } from '../types'
 import React from 'react'
 
-export const context = React.createContext<
-  Partial<{
-    reRender: boolean
-    setReRender: Dispatch<boolean>
-  }>
->({})
-
 interface CompoProps {
   components: ComponentSchema[] | undefined
+  width: number
+  height: number
 }
 // 画布
-export const RHtml: React.FC<CompoProps> = ({ components }) => {
-  // 用于预览时能够初始化事件
-  const [reRender, setReRender] = useState(false)
-  // 获取预览页面数据
-
+export const RHtml: React.FC<CompoProps> = ({ components, width, height }) => {
   if (components) {
     return (
-      <context.Provider
-        value={{
-          reRender,
-          setReRender
+      <div
+        style={{
+          position: 'relative',
+          width: `${width}px`,
+          height: `${height}px`,
+          border: '1px solid black',
+          backgroundColor: 'lightblue'
         }}
       >
-        <div style={{ position: 'absolute', width: '350px', height: '600px', backgroundColor: 'lightblue' }}></div>
         <div className="canvas-wrapper preview-canvas">
           {components.map((componentSchema, index) => {
             const schema = componentSchema
@@ -41,7 +34,7 @@ export const RHtml: React.FC<CompoProps> = ({ components }) => {
             )
           })}
         </div>
-      </context.Provider>
+      </div>
     )
   } else {
     return <div>Loading-----</div>

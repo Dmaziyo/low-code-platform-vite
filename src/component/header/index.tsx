@@ -16,7 +16,7 @@ const FormItem = Form.Item
 const emptyNode = () => <span className="empty">未设置</span>
 
 export const LowCodeHeader = () => {
-  const { pageInfo, setPageInfo, params, components } = useContext(context)
+  const { pageInfo, setPageInfo, params, components, width = 320, height = 600 } = useContext(context)
   const [headerInfo, setHeaderInfo] = useState<Array<{ label: string; value: string | React.ReactNode }>>([])
   const [form] = Form.useForm()
 
@@ -78,7 +78,7 @@ export const LowCodeHeader = () => {
     })
   }
   const getHtml = () => {
-    console.log(ReactDOMServer.renderToString(<RHtml components={components} />))
+    console.log(ReactDOMServer.renderToString(<RHtml width={width} height={height} components={components} />))
   }
   return (
     <Header className="header">
