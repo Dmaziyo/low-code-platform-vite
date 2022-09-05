@@ -5,7 +5,7 @@
  * @returns
  */
 
-import { context } from '@//views/editor'
+import { context } from '@//store'
 import { Collapse, Select, Input } from '@arco-design/web-react'
 // import { useEffect } from 'react'
 import { useContext } from 'react'

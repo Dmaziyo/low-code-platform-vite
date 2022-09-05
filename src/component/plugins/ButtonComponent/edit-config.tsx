@@ -1,4 +1,4 @@
-import { context } from '@//views/editor'
+import { context } from '@//store'
 import { IButtonComponent } from '@//types/lowCodeCompo.type'
 import { Collapse, Form } from '@arco-design/web-react'
 import { useContext, useEffect, useState } from 'react'

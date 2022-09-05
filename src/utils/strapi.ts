@@ -12,6 +12,8 @@ const strapi = new Strapi({
 interface IResponseData {
   attributes: {
     components: ComponentSchema[]
+    width: number
+    height: number
     createdAt: string
     publishedAt: string
     updatedAt: string
@@ -48,7 +50,7 @@ export async function deletePage(id: number) {
 export async function findPage(id: number) {
   const res = await strapi.findOne('pages', id)
   const data = res.data as IResponseData
-  return data.attributes.components
+  return data.attributes
 }
 
 // 查询所有页面

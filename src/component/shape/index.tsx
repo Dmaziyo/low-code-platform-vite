@@ -1,6 +1,6 @@
 import { IFCShapeProps, IShapeCommonStyle } from '@//types/shape.type'
-import { context } from '@//views/editor'
-import React, { useContext, useEffect, useState } from 'react'
+import { context } from '@//store'
+import React, { CSSProperties, useContext, useEffect, useState } from 'react'
 
 // 定义方向
 const directionKey = {
@@ -13,7 +13,7 @@ const points = ['lt', 'rt', 'lb', 'rb', 'l', 'r', 't', 'b']
 
 // 类似于遮罩,将组件包含在其中,并且实现拖拽和拉伸功能
 export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
-  const { editingCompo, setReRender } = useContext(context)
+  const { editingCompo, setReRender, setEditingCompo, width = 320, height = 600 } = useContext(context)
   let { reRender } = useContext(context)
   const { component, children } = props
   const [active, setActive] = useState(false)
@@ -143,8 +143,8 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
       const currY = e.clientY
       const disY = currY - startY + startTop
       const disX = currX - startX + startLeft
-      const criticalValueY = 568 - pos.height
-      const criticalValueX = 320 - pos.width
+      const criticalValueY = height - pos.height
+      const criticalValueX = width - pos.width
       // 超过临界值就停止
       pos.top = disY < 0 ? 0 : disY > criticalValueY ? criticalValueY : disY
       pos.left = disX < 0 ? 0 : disX > criticalValueX ? criticalValueX : disX
@@ -174,9 +174,14 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
 
   return (
     <div
+      onClick={() => setEditingCompo?.(component)}
+      style={{
+        ...(component?.style as CSSProperties),
+        display: 'inline-block',
+        outline: active ? '1px dashed #bcbcbc' : ''
+      }}
       className="element-on-edit-canvas"
       onMouseDown={(e) => mouseDownForElement(e)}
-      style={{ outline: active ? '1px dashed #bcbcbc' : '', height: '100%', width: '100%' }}
     >
       {active &&
         points.map((point) => {

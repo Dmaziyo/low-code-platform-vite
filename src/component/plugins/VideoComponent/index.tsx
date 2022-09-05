@@ -1,11 +1,9 @@
 import { EditComponentKey } from '@//types/editbase.type'
 import { ComponentName, ComponentSchema, IVideoComponent, PluginComponentProps } from '@//types/lowCodeCompo.type'
 import { defaultStyle } from '../plugins'
-import { initialOptions } from '@//types/video.js.type'
-import videojs, { VideoJsPlayer } from 'video.js'
+// import { initialOptions } from '@//types/video.js.type'
 // Styles
-import 'video.js/dist/video-js.css'
-import { useEffect, useRef, useState } from 'react'
+// import { useEffect, useRef, useState } from 'react'
 
 export const videoSchema = (id: string): ComponentSchema => {
   return {
@@ -55,50 +53,47 @@ export const videoSchema = (id: string): ComponentSchema => {
 }
 
 export const VideoCompo: React.FC<PluginComponentProps> = ({ schema }) => {
-  const videoNode = useRef<HTMLVideoElement>(null)
-  const player = useRef<videojs.Player>()
-  const [videoPlayer, setVideoPlayer] = useState<VideoJsPlayer | null>()
+  // const videoNode = useRef<HTMLVideoElement>(null)
+  // const player = useRef<videojs.Player>()
+  // const [videoPlayer, setVideoPlayer] = useState<VideoJsPlayer | null>()
   const compoSchema = schema as IVideoComponent
   const props = compoSchema.props
-  const options: videojs.PlayerOptions = {
-    ...initialOptions,
-    sources: [
-      {
-        src: '/assets/video1.mp4',
-        type: 'video/mp4'
-      }
-    ]
-  }
+  // const options: videojs.PlayerOptions = {
+  //   ...initialOptions,
+  //   sources: [
+  //     {
+  //       src: '/assets/video1.mp4',
+  //       type: 'video/mp4'
+  //     }
+  //   ]
+  // }
 
-  useEffect(() => {
-    // 修改路径
-    if (videoPlayer) {
-      videoPlayer.src(props.url)
-      videoPlayer.poster(props.poster)
-    }
-    // 初始化video
-    else {
-      player.current = videojs(videoNode.current, {
-        ...options
-      }).ready(function (this) {
-        setVideoPlayer(this)
-      })
-      return () => {
-        if (player.current) {
-          player.current.dispose()
-        }
-      }
-    }
-  }, [options])
+  // useEffect(() => {
+  //   // 修改路径
+  //   if (videoPlayer) {
+  //     videoPlayer.src(props.url)
+  //     videoPlayer.poster(props.poster)
+  //   }
+  //   // 初始化video
+  //   else {
+  //     player.current = videojs(videoNode.current, {
+  //       ...options
+  //     }).ready(function (this) {
+  //       setVideoPlayer(this)
+  //     })
+  //     return () => {
+  //       if (player.current) {
+  //         player.current.dispose()
+  //       }
+  //     }
+  //   }
+  // }, [options])
 
   return (
     <div style={{ height: '100%', width: '100%' }}>
-      <video
-        style={{ height: '100%', width: '100%' }}
-        poster={props.poster}
-        ref={videoNode}
-        className="video-js vjs-big-play-centered"
-      />
+      <video className="video-js" controls preload="auto" width="300" height="100" data-setup="{}">
+        <source src={props.url} type="video/mp4" />
+      </video>
     </div>
   )
 }

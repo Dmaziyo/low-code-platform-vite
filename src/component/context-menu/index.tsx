@@ -1,4 +1,4 @@
-import { context } from '@//views/editor'
+import { context } from '@//store'
 import { Menu } from '@arco-design/web-react'
 import { MouseEvent, useContext } from 'react'
 const MenuItem = Menu.Item

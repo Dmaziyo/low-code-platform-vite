@@ -1,4 +1,4 @@
-import { context } from '@//views/editor'
+import { context } from '@//store'
 import { IVideoEditConfig } from '@//types/editConfig.type'
 import { IVideoComponent } from '@//types/lowCodeCompo.type'
 import { Form } from '@arco-design/web-react'

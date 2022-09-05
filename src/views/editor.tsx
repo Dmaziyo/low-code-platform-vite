@@ -13,33 +13,16 @@ import { Layout } from '@arco-design/web-react'
 import { IPageInfo } from '../types'
 import { LowCodeHeader } from '../component/header'
 import Content from '@arco-design/web-react/es/Layout/content'
-import { Params, useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { createPage, findPage } from '../utils/strapi'
-
-type Dispatch<T> = React.Dispatch<React.SetStateAction<T>>
-
-// 采用context来进行数据交互
-export const context = React.createContext<
-  Partial<{
-    components: ComponentSchema[]
-    setComponents: Dispatch<ComponentSchema[]>
-    editingCompo: ComponentSchema | null
-    setEditingCompo: Dispatch<ComponentSchema | null>
-    reRender: boolean
-    setReRender: Dispatch<boolean>
-    clone: (conKey: ComponentName, schema?: ComponentSchema) => void
-    pageInfo: IPageInfo | null
-    setPageInfo: Dispatch<IPageInfo | null>
-    params: Readonly<Params<string>>
-    menuPos: number[]
-    setMenuPos: React.Dispatch<React.SetStateAction<number[]>>
-  }>
->({})
+import { context } from '../store'
 
 export function Editor() {
   const [components, setComponents] = useState<ComponentSchema[]>([])
   const [editingCompo, setEditingCompo] = useState<ComponentSchema | null>(null)
   const [reRender, setReRender] = useState(false)
+  const [width, setWidth] = useState(320)
+  const [height, setHeight] = useState(600)
   const [pageInfo, setPageInfo] = useState<IPageInfo | null>(null)
   const [menuPos, setMenuPos] = useState<number[]>([])
   const params = useParams()
@@ -49,8 +32,11 @@ export function Editor() {
     if (params.id) {
       // 获取页面数据
       findPage(+params.id).then(
-        (components) => {
+        ({ components, width, height }) => {
           setComponents(components)
+          setWidth(width)
+          setHeight(height)
+          console.log(height)
         },
         () => {
           // 新建页面，并且重定向至新建页面
@@ -96,7 +82,9 @@ export function Editor() {
         setPageInfo,
         params,
         menuPos,
-        setMenuPos
+        setMenuPos,
+        width,
+        height
       }}
     >
       <LowCodeHeader />

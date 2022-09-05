@@ -1,4 +1,4 @@
-import { context } from '@//views/editor'
+import { context } from '@//store'
 import { ComponentName } from '@//types/lowCodeCompo.type'
 import { Layout, Tabs, Typography } from '@arco-design/web-react'
 // import { Form } from '@arco-design/web-react'
