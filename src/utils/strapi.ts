@@ -29,8 +29,8 @@ export async function createPage(navigate: NavigateFunction) {
 }
 
 // 更新页面
-export async function updatePage(id: number, components: ComponentSchema[] = []) {
-  await strapi.update('pages', id, { components }).then(
+export async function updatePage(id: number, components: ComponentSchema[] = [], width = 400, height = 600) {
+  await strapi.update('pages', id, { components, width, height }).then(
     () => {
       Message.success('保存成功')
     },

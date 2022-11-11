@@ -47,6 +47,7 @@ export function Preview() {
           setReRender
         }}
       >
+        <div className="preview-wrapper"></div>
         <div className="canvas-wrapper preview-canvas" style={{ width: `${width}px`, height: `${height}px` }}>
           {components.map((componentSchema, index) => {
             const schema = componentSchema

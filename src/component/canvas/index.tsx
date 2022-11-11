@@ -11,7 +11,8 @@ import { context } from '@//store'
 
 // 画布
 export function Canvas() {
-  const { components, setEditingCompo, clone, setReRender, setMenuPos, menuPos, width, height } = useContext(context)
+  const { components, setEditingCompo, clone, setReRender, setMenuPos, menuPos, width, height, setWidth, setHeight } =
+    useContext(context)
   const canvasRef = useRef(null)
   // 实现拖拽的配置
   const [{ isOver }, drop] = useDrop(() => ({
@@ -44,6 +45,25 @@ export function Canvas() {
             )
           })}
           <ContextMenu></ContextMenu>
+          <div style={{ position: 'absolute', bottom: '-20px', width: `${width}px`, textAlign: 'center' }}>
+            <input
+              className="size-input "
+              value={width}
+              onChange={(e) => {
+                setWidth?.(+e.target.value)
+              }}
+              type="number"
+            />
+            <input
+              className="size-input "
+              onChange={(e) => {
+                setHeight?.(+e.target.value)
+                console.log(setHeight)
+              }}
+              value={height}
+              type="number"
+            />
+          </div>
         </div>
       </div>
     )

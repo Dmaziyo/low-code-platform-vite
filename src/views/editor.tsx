@@ -84,7 +84,9 @@ export function Editor() {
         menuPos,
         setMenuPos,
         width,
-        height
+        height,
+        setWidth,
+        setHeight
       }}
     >
       <LowCodeHeader />

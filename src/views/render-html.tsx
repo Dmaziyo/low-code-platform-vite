@@ -19,8 +19,7 @@ export const RHtml: React.FC<CompoProps> = ({ components, width, height }) => {
           position: 'relative',
           width: `${width}px`,
           height: `${height}px`,
-          border: '1px solid black',
-          backgroundColor: 'lightblue'
+          border: '1px solid black'
         }}
       >
         <div className="canvas-wrapper preview-canvas">

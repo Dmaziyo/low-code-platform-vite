@@ -22,13 +22,27 @@ export const LowCodeHeader = () => {
 
   const _updatePage = async () => {
     if (params?.id) {
-      await updatePage(+params.id, components)
+      await updatePage(+params.id, components, width, height)
     }
   }
 
   const previewPage = () => {
     const url = `${BASE_URL}/preview/${params?.id}`
     window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
+  const getHtml = () => {
+    const element = document.createElement('a')
+    element.setAttribute(
+      'href',
+      'data:text/plain;charset=utf-8, ' +
+        encodeURIComponent(
+          ReactDOMServer.renderToString(<RHtml width={width} height={height} components={components} />)
+        )
+    )
+    element.setAttribute('download', 'test.html')
+    document.body.appendChild(element)
+    element.click()
   }
   useEffect(() => {
     const tempHeaderInfo = [
@@ -77,9 +91,7 @@ export const LowCodeHeader = () => {
       }
     })
   }
-  const getHtml = () => {
-    console.log(ReactDOMServer.renderToString(<RHtml width={width} height={height} components={components} />))
-  }
+
   return (
     <Header className="header">
       <div className="page-info">
