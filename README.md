@@ -1,4 +1,7 @@
 # low-code-platform-vite
+![display](https://user-images.githubusercontent.com/74136983/201639278-9cfd22f0-4c57-4ece-8441-bb10e8c5e5c9.gif)
+
+
 ## ✨ Features
 - 极致的性能优化（代码压缩，产物 tree-shaking 等）
 - 暗黑模式
