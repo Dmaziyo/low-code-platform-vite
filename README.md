@@ -1,5 +1,6 @@
 # low-code-platform-vite
-![display](https://user-images.githubusercontent.com/74136983/201639278-9cfd22f0-4c57-4ece-8441-bb10e8c5e5c9.gif)
+
+![沉迷写代码](https://user-images.githubusercontent.com/74136983/201640591-c1d44aad-2563-4383-bd12-27e606549277.gif)
 
 
 ## ✨ Features
